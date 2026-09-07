@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>동래구청장 비서 · 공식문서 스튜디오</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #F6F1E6;
+    --paper: #FCFAF3;
+    --ink: #221F1A;
+    --ink-soft: #5B564C;
+    --navy: #1F2C46;
+    --navy-soft: #33425F;
+    --seal: #A8382C;
+    --seal-soft: #C65B4C;
+    --line: #D8CDAF;
+    --line-strong: #B8A97F;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background: var(--bg);
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(184,169,127,0.18) 1px, transparent 0);
+    background-size: 22px 22px;
+    color: var(--ink);
+    font-family: 'Noto Sans KR', sans-serif;
+    min-height: 100vh;
+  }
+  .wrap{
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 36px 24px 64px;
+  }
+  header.masthead{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    border-bottom: 2px solid var(--navy);
+    padding-bottom: 18px;
+    margin-bottom: 30px;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .masthead-left{
+    display:flex;
+    align-items:center;
+    gap:16px;
+  }
+  .emblem{
+    width:52px;height:52px;flex-shrink:0;
+  }
+  .titles h1{
+    font-family:'Noto Serif KR', serif;
+    font-weight:700;
+    font-size: 26px;
+    margin:0 0 4px;
+    letter-spacing: -0.01em;
+    color: var(--navy);
+  }
+  .titles p{
+    margin:0;
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+  .masthead-right{
+    font-family:'Noto Serif KR', serif;
+    font-size: 13px;
+    color: var(--ink-soft);
+    text-align:right;
+    line-height:1.6;
+  }
+  .layout{
+    display:grid;
+    grid-template-columns: 380px 1fr;
+    gap: 28px;
+    align-items:start;
+  }
+  @media (max-width: 880px){
+    .layout{ grid-template-columns: 1fr; }
+  }
+  .panel{
+    background: var(--paper);
+    border: 1px solid var(--line);
+    box-shadow: 0 1px 0 var(--line-strong);
+  }
+  .form-panel{
+    padding: 24px;
+  }
+  .form-panel h2{
+    font-family:'Noto Serif KR', serif;
+    font-size: 15px;
+    margin: 0 0 18px;
+    color: var(--navy);
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .form-panel h2::before{
+    content:"";
+    width:6px;height:6px;
+    background: var(--seal);
+    display:inline-block;
+    border-radius: 50%;
+  }
+  .field{ margin-bottom: 18px; }
+  .field label{
+    display:block;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+  .doctype-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .doctype-btn{
+    border: 1px solid var(--line);
+    background: #fff;
+    color: var(--ink);
+    padding: 9px 8px;
+    font-size: 12.5px;
+    font-family:'Noto Sans KR', sans-serif;
+    cursor:pointer;
+    text-align:left;
+    transition: border-color .15s, background .15s;
+    line-height:1.35;
+  }
+  .doctype-btn:hover{ border-color: var(--navy-soft); }
+  .doctype-btn.active{
+    background: var(--navy);
+    border-color: var(--navy);
+    color: #F6F1E6;
+  }
+  textarea, input[type=text], select{
+    width:100%;
+    border: 1px solid var(--line);
+    background: #fff;
+    padding: 10px 11px;
+    font-family:'Noto Sans KR', sans-serif;
+    font-size: 13.5px;
+    color: var(--ink);
+    resize: vertical;
+  }
+  textarea:focus, input:focus, select:focus{
+    outline: none;
+    border-color: var(--navy-soft);
+  }
+  .key-hint{
+    font-size: 11px;
+    color: var(--ink-soft);
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+  .key-hint a{ color: var(--navy-soft); }
+  .row2{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .generate-btn{
+    width:100%;
+    background: var(--seal);
+    color: #FCFAF3;
+    border: none;
+    padding: 13px;
+    font-size: 14.5px;
+    font-family:'Noto Serif KR', serif;
+    font-weight:600;
+    letter-spacing: 0.02em;
+    cursor:pointer;
+    margin-top: 6px;
+    transition: background .15s;
+  }
+  .generate-btn:hover{ background: var(--seal-soft); }
+  .generate-btn:disabled{ background: #B9AE94; cursor:not-allowed; }
+
+  .output-panel{
+    min-height: 560px;
+    padding: 40px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .output-panel::before{
+    content:"";
+    position:absolute; left:0; top:0; bottom:0;
+    width: 3px;
+    background: var(--navy);
+  }
+  .empty-state{
+    height: 460px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    color: var(--ink-soft);
+    text-align:center;
+    gap: 10px;
+  }
+  .empty-state svg{ width:64px;height:64px; opacity:0.35; margin-bottom:6px; }
+  .empty-state .t1{ font-family:'Noto Serif KR', serif; font-size:16px; color: var(--navy); }
+  .empty-state .t2{ font-size:12.5px; max-width:280px; line-height:1.6; }
+
+  .loading-state{
+    height: 460px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap: 14px;
+    color: var(--ink-soft);
+  }
+  .brush{
+    width: 40px; height: 40px;
+    border: 3px solid var(--line);
+    border-top-color: var(--seal);
+    border-radius: 50%;
+    animation: spin 0.9s linear infinite;
+  }
+  @keyframes spin{ to{ transform: rotate(360deg); } }
+  .loading-msg{ font-size:13px; }
+
+  .doc-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 16px;
+    margin-bottom: 22px;
+  }
+  .doc-type-label{
+    font-size: 11.5px;
+    color: var(--ink-soft);
+    letter-spacing: 0.04em;
+  }
+  .doc-title{
+    font-family:'Noto Serif KR', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 4px 0 0;
+  }
+  .seal-mark{
+    width: 62px; height: 62px;
+    flex-shrink:0;
+    animation: stamp-in .5s cubic-bezier(.2,1.4,.4,1) both;
+    animation-delay: .15s;
+  }
+  @keyframes stamp-in{
+    0%{ opacity:0; transform: scale(1.8) rotate(-14deg); }
+    100%{ opacity:1; transform: scale(1) rotate(-8deg); }
+  }
+  .doc-body{
+    font-family:'Noto Serif KR', serif;
+    font-size: 15.5px;
+    line-height: 1.95;
+    color: var(--ink);
+    white-space: pre-wrap;
+    max-width: 68ch;
+  }
+  .doc-actions{
+    display:flex;
+    gap: 10px;
+    margin-top: 26px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+  }
+  .action-btn{
+    border: 1px solid var(--navy);
+    background: #fff;
+    color: var(--navy);
+    padding: 9px 16px;
+    font-size: 12.5px;
+    font-family:'Noto Sans KR', sans-serif;
+    cursor:pointer;
+    transition: background .15s, color .15s;
+  }
+  .action-btn:hover{ background: var(--navy); color: #F6F1E6; }
+  .action-btn.copied{ background: var(--seal); border-color: var(--seal); color:#fff; }
+
+  .error-box{
+    border: 1px solid var(--seal);
+    background: #FBEDEA;
+    color: var(--seal);
+    padding: 14px 16px;
+    font-size: 13px;
+    margin-top: 16px;
+  }
+  ::selection{ background: var(--line-strong); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="masthead-left">
+      <svg class="emblem" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="46" fill="none" stroke="#1F2C46" stroke-width="3"/>
+        <circle cx="50" cy="50" r="36" fill="none" stroke="#1F2C46" stroke-width="1.4"/>
+        <text x="50" y="58" text-anchor="middle" font-family="Noto Serif KR, serif" font-size="22" fill="#1F2C46" font-weight="700">東萊</text>
+      </svg>
+      <div class="titles">
+        <h1>공식문서 스튜디오</h1>
+        <p>동래구청장 비서실 · 문서 초안 작성 도구</p>
+      </div>
+    </div>
+    <div class="masthead-right">
+      Dongrae District Office<br>Secretariat Draft Studio
+    </div>
+  </header>
+
+  <div class="layout">
+    <!-- FORM PANEL -->
+    <div class="panel form-panel">
+      <h2>API 키</h2>
+      <div class="field">
+        <label for="apiKey">Anthropic API 키</label>
+        <input type="password" id="apiKey" placeholder="sk-ant-...">
+        <div class="key-hint">이 브라우저 탭에서만 기억되며, 새로고침하면 다시 입력해야 합니다. <a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener">console.anthropic.com</a>에서 발급받을 수 있습니다.</div>
+      </div>
+
+      <h2>문서 종류</h2>
+      <div class="doctype-grid" id="doctypeGrid"></div>
+
+      <h2 style="margin-top:26px;">작성 정보</h2>
+
+      <div class="field">
+        <label for="purpose">상황 / 목적</label>
+        <textarea id="purpose" rows="3" placeholder="예: 태풍 피해 복구 관련 구민 안내, 경로당 어버이날 행사 축사 등"></textarea>
+      </div>
+
+      <div class="field">
+        <label for="content">핵심 내용 (포함할 사실·수치·이름 등)</label>
+        <textarea id="content" rows="4" placeholder="예: 일시, 장소, 대상, 강조할 정책, 인용할 통계 등을 적어주세요"></textarea>
+      </div>
+
+      <div class="row2">
+        <div class="field">
+          <label for="audience">받는 대상</label>
+          <input type="text" id="audience" placeholder="예: 구민 전체, 지역 상인회">
+        </div>
+        <div class="field">
+          <label for="signer">발신 / 화자</label>
+          <input type="text" id="signer" value="동래구청장 장준용">
+        </div>
+      </div>
+
+      <div class="row2">
+        <div class="field">
+          <label for="tone">어조</label>
+          <select id="tone">
+            <option value="격식 있고 신중한">격식 있고 신중한</option>
+            <option value="따뜻하고 친근한">따뜻하고 친근한</option>
+            <option value="단호하고 명확한">단호하고 명확한</option>
+            <option value="감사와 겸손이 담긴">감사와 겸손이 담긴</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="length">분량</label>
+          <select id="length">
+            <option value="짧게 (3~5문장)">짧게 (3~5문장)</option>
+            <option value="보통 (400~600자)" selected>보통 (400~600자)</option>
+            <option value="길게 (800자 이상)">길게 (800자 이상)</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="generate-btn" id="generateBtn">초안 작성하기</button>
+    </div>
+
+    <!-- OUTPUT PANEL -->
+    <div class="panel output-panel" id="outputPanel">
+      <div class="empty-state" id="emptyState">
+        <svg viewBox="0 0 100 100" fill="none" stroke="#5B564C" stroke-width="1.6">
+          <rect x="20" y="14" width="60" height="76" rx="1"/>
+          <line x1="30" y1="30" x2="70" y2="30"/>
+          <line x1="30" y1="40" x2="70" y2="40"/>
+          <line x1="30" y1="50" x2="58" y2="50"/>
+          <circle cx="66" cy="66" r="12" stroke="#A8382C"/>
+        </svg>
+        <div class="t1">작성할 문서를 선택하고 정보를 입력하세요</div>
+        <div class="t2">왼쪽에서 문서 종류를 고르고 상황과 핵심 내용을 적으면 이곳에 초안이 작성됩니다.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const DOCTYPES = [
+  { id: 'press', label: '보도자료', guide: '육하원칙에 따라 리드문-본문-마무리 구조로 작성하는 보도자료. 제목, 부제, 본문 순서로 작성.' },
+  { id: 'statement', label: '공식 입장문·성명서', guide: '구청 또는 구청장 명의의 공식 입장문. 사실관계 정리, 입장, 향후 조치 순으로 신중하게 작성.' },
+  { id: 'greeting', label: '인사말·축사', guide: '행사에서 낭독할 인사말 또는 축사. 도입-감사-축하 메시지-당부-마무리 순.' },
+  { id: 'thanks', label: '감사 인사말', guide: '지지자, 협력기관, 구민 등에게 보내는 감사 메시지. 진정성 있고 과하지 않게.' },
+  { id: 'sns', label: 'SNS 게시물', guide: '페이스북 또는 블로그용 짧고 친근한 게시물. 해시태그 3~5개 포함, 이모지는 절제해서 사용.' },
+  { id: 'banner', label: '현수막·표어 문구', guide: '현수막이나 배너에 들어갈 짧고 임팩트 있는 문구. 3~5개 후보를 제시.' },
+  { id: 'policy', label: '정책 제안서 초안', guide: '정책 개선 제안서 초안. 배경 및 문제점-개선방안-기대효과 구조로 작성.' },
+  { id: 'free', label: '기타 (자유 형식)', guide: '위 정보를 참고하여 상황에 맞는 문서를 자유롭게 작성.' },
+];
+
+let selectedType = DOCTYPES[0].id;
+
+const grid = document.getElementById('doctypeGrid');
+DOCTYPES.forEach(dt => {
+  const btn = document.createElement('button');
+  btn.className = 'doctype-btn' + (dt.id === selectedType ? ' active' : '');
+  btn.textContent = dt.label;
+  btn.dataset.id = dt.id;
+  btn.addEventListener('click', () => {
+    selectedType = dt.id;
+    document.querySelectorAll('.doctype-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+  grid.appendChild(btn);
+});
+
+const generateBtn = document.getElementById('generateBtn');
+const outputPanel = document.getElementById('outputPanel');
+
+const LOADING_MESSAGES = [
+  '초안을 작성하는 중입니다...',
+  '문장을 다듬는 중입니다...',
+  '어조를 맞추는 중입니다...'
+];
+
+async function generateDocument(){
+  const dt = DOCTYPES.find(d => d.id === selectedType);
+  const purpose = document.getElementById('purpose').value.trim();
+  const content = document.getElementById('content').value.trim();
+  const audience = document.getElementById('audience').value.trim();
+  const signer = document.getElementById('signer').value.trim();
+  const tone = document.getElementById('tone').value;
+  const length = document.getElementById('length').value;
+
+  const apiKey = document.getElementById('apiKey').value.trim();
+
+  if(!apiKey){
+    alert('Anthropic API 키를 입력해 주세요.');
+    document.getElementById('apiKey').focus();
+    return;
+  }
+
+  if(!purpose){
+    alert('상황 / 목적을 입력해 주세요.');
+    return;
+  }
+
+  generateBtn.disabled = true;
+  generateBtn.textContent = '작성 중...';
+
+  outputPanel.innerHTML = `
+    <div class="loading-state">
+      <div class="brush"></div>
+      <div class="loading-msg">${LOADING_MESSAGES[Math.floor(Math.random()*LOADING_MESSAGES.length)]}</div>
+    </div>
+  `;
+
+  const systemPrompt = `당신은 대한민국 부산광역시 동래구청장 비서실에서 근무하는 노련한 공직 문서 작성 전문가입니다.
+문서 종류: ${dt.label}
+작성 지침: ${dt.guide}
+발신/화자: ${signer || '동래구청장'}
+받는 대상: ${audience || '해당 없음'}
+어조: ${tone}
+분량: ${length}
+
+다음 원칙을 지켜 작성하세요:
+- 실제 사용 가능한 완성된 원고를 작성한다. 괄호로 된 지시문이나 메모는 남기지 않는다.
+- 사실관계, 수치, 고유명사는 사용자가 제공한 내용만 사용하고 임의로 지어내지 않는다. 정보가 부족하면 일반적이고 안전한 표현으로 대체한다.
+- 한국 지방자치단체 공직 사회에서 통용되는 표현과 격식을 따른다.
+- 응답은 문서 제목(있는 경우)과 본문만 출력한다. 부연 설명이나 인사말("네, 작성해드리겠습니다" 등)은 절대 포함하지 않는다.
+- 첫 줄은 문서의 제목으로 하고, 그 다음 줄부터 본문을 작성한다. 현수막·표어 문구의 경우 첫 줄에 "현수막 문구 후보"라고 쓰고 후보들을 나열한다.`;
+
+  const userPrompt = `상황/목적: ${purpose}\n핵심 내용: ${content || '(추가 정보 없음)'}`;
+
+  try{
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-key": apiKey,
+        "anthropic-version": "2023-06-01",
+        "anthropic-dangerous-direct-browser-access": "true"
+      },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-6",
+        max_tokens: 1000,
+        system: systemPrompt,
+        messages: [{ role: "user", content: userPrompt }]
+      })
+    });
+
+    if(!response.ok){
+      if(response.status === 401){
+        throw new Error('API 키가 올바르지 않습니다. 다시 확인해 주세요.');
+      }
+      throw new Error('API 응답 오류 (' + response.status + ')');
+    }
+
+    const data = await response.json();
+    const textBlocks = (data.content || []).filter(b => b.type === 'text').map(b => b.text);
+    const fullText = textBlocks.join('\n').trim();
+
+    if(!fullText){
+      throw new Error('생성된 내용이 없습니다.');
+    }
+
+    const lines = fullText.split('\n');
+    const title = lines[0].replace(/^#+\s*/, '').trim();
+    const body = lines.slice(1).join('\n').trim();
+
+    renderOutput(dt.label, title, body || fullText);
+
+  }catch(err){
+    outputPanel.innerHTML = `
+      <div class="error-box">
+        문서 작성 중 오류가 발생했습니다: ${escapeHtml(err.message)}<br>
+        다시 시도해 주세요.
+      </div>
+    `;
+    console.error(err);
+  }finally{
+    generateBtn.disabled = false;
+    generateBtn.textContent = '초안 작성하기';
+  }
+}
+
+function renderOutput(typeLabel, title, body){
+  outputPanel.innerHTML = `
+    <div class="doc-head">
+      <div>
+        <div class="doc-type-label">${escapeHtml(typeLabel)}</div>
+        <div class="doc-title">${escapeHtml(title)}</div>
+      </div>
+      <svg class="seal-mark" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="42" fill="none" stroke="#A8382C" stroke-width="4"/>
+        <text x="50" y="46" text-anchor="middle" font-family="Noto Serif KR, serif" font-size="15" fill="#A8382C" font-weight="700">東萊區</text>
+        <text x="50" y="66" text-anchor="middle" font-family="Noto Serif KR, serif" font-size="15" fill="#A8382C" font-weight="700">廳長印</text>
+      </svg>
+    </div>
+    <div class="doc-body" id="docBody">${escapeHtml(body)}</div>
+    <div class="doc-actions">
+      <button class="action-btn" id="copyBtn">본문 복사</button>
+      <button class="action-btn" id="regenBtn">다시 작성</button>
+    </div>
+  `;
+  document.getElementById('copyBtn').addEventListener('click', (e) => {
+    const text = document.getElementById('docBody').innerText;
+    navigator.clipboard.writeText(title + '\n\n' + text).then(() => {
+      e.target.textContent = '복사됨';
+      e.target.classList.add('copied');
+      setTimeout(() => {
+        e.target.textContent = '본문 복사';
+        e.target.classList.remove('copied');
+      }, 1600);
+    });
+  });
+  document.getElementById('regenBtn').addEventListener('click', generateDocument);
+}
+
+function escapeHtml(str){
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+generateBtn.addEventListener('click', generateDocument);
+</script>
+</body>
+</html>
